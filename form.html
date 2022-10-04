@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Page</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  <style>
+    .sendtbn {
+      background-color: orangeed;
+      text-transform: capitalize;
+    }
+
+    .container input {
+      border: 2px solid;
+    }
+
+    h6 {
+      color: #800080;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container pt-5">
+    <form method="" action="#">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <h6 class="text-center">Demo for schools</h6>
+          <div class="form-outline mb-4">
+            <input type="text" id="name" class="form-control" />
+            <label class="form-label" for="name">Name</label>
+            <p id="name" class="invalid-feedback nameFeedback"></p>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="schoolname" class="form-control" />
+            <label class="form-label" for="schoolname">School Name</label>
+            <p id="schoolname" class="invalid-feedback schoolnameFeedback"></p>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="email" id="Email" class="form-control" />
+            <label class="form-label" for="Email">Email ID</label>
+            <p class="invalid-feedback emailFeedback" id="Email"></p>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="contactnumber" class="form-control" maxlength="10" />
+            <label class="form-label" for="contactnumber">Contact Number</label>
+            <p class="invalid-feedback contactnumberFeedback" id="contactnumber"></p>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="schooladdress" class="form-control" />
+            <label class="form-label" for="schooladdress">
+              School Address
+            </label>
+
+            <p id="schooladdress" class="schooladdressFeedback invalid-feedback"></p>
+          </div>
+
+          <div class="form-outline mb-4">
+            <select class="custom-select form-select-lg mb-3" id="state" required>
+              <option selected>State...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary btn-block sendtbn submit">
+            Send the Request
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+  <script>
+    function validateName() {
+      let nameField = document.getElementById('name');
+      $(nameField).on("blur input", () => {
+        let patternName = /^[a-zA-Z][a-zA-Z\s]{2,}$/;
+        if ($(nameField).val().match(patternName)) {
+          $(nameField).addClass('is-valid').removeClass('is-invalid');
+          $('.nameFeedback').text('');
+        } else {
+          $(nameField).removeClass('is-valid').addClass('is-invalid')
+          $('.nameFeedback').text('Please Enter a valid name');
+        }
+      });
+    }
+
+    function validateschool() {
+      let x = document.getElementById('schoolname')
+      let y = document.getElementById('schooladdress')
+      $(x).on("blur input", function () {
+        let patternName = /^[a-zA-Z0-9]{2,}$/;
+        if ($(x).val().match(patternName)) {
+          $(x).addClass('is-valid').removeClass('is-invalid');
+          ('.schoolnameFeedback').text('');
+        } else {
+          $(x).removeClass('is-valid').addClass('is-invalid');
+          $('schoolnameFeedback').text('Please Enter a valid schoolname');
+        }
+      });
+
+      $(y).on("blur input", function () {
+        let patternName = /^[a-zA-Z0-9]{2,}$/;
+        if ($(y).val().match(patternName)) {
+          $(y).addClass('is-valid').removeClass('is-invalid');
+          ('.schooladdressFeedback').text('');
+        } else {
+          $(y).removeClass('is-valid').addClass('is-invalid');
+          ('schooladdressFeedback').text('Please enter correct school addresss');
+        }
+      });
+    }
+
+    function validateEmail() {
+      let nameField = document.getElementById('Email');
+      $(nameField).on("blur input", () => {
+        let patternName = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if ($(nameField).val().match(patternName)) {
+          $(nameField).addClass('is-valid').removeClass('is-invalid');
+          $('.emailFeedback').text('');
+        } else {
+          $(nameField).removeClass('is-valid').addClass('is-invalid');
+          ('.emailFeedback').text('Please enter a valid email')
+        }
+      });
+    }
+
+    function validateNumber() {
+      let noField = document.getElementById('contactnumber');
+      $(noField).on("blur input", () => {
+        let patternName = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/;
+        if ($(noField).val().match(patternName)) {
+          $(noField).addClass('is-valid').removeClass('is-invalid');
+          ('.contactnumberFeedback').text('');
+        } else {
+          $(noField).removeClass('is-valid').addClass('is-invalid');
+          ('.contactnumberFeedback').text('Please enter valid number');
+        }
+      });
+    }
+    $(document).ready(function () {
+      validateName();
+      validateschool();
+      validateEmail();
+      validateNumber();
+    });
+
+  </script>
+</body>
+</html>
